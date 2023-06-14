@@ -8,6 +8,8 @@ import {
   ChakraProvider,
   Box,
   Text,
+  Flex,
+  Textarea,
 } from '@chakra-ui/react';
 import { usePost } from '../../../../Provider/Posts';
 import { useForm } from 'react-hook-form';
@@ -21,9 +23,9 @@ interface FormData {
 
 export const Form = () => {
 
-  const {posts, setRegisterPost, registerPost, registerNewPost} = usePost();
+  const { posts, setRegisterPost, registerPost, registerNewPost } = usePost();
 
-    
+
   const postSchema = yup.object().shape({
     title: yup.string().required(),
     content: yup.string().required(),
@@ -37,41 +39,57 @@ export const Form = () => {
   } = useForm({ resolver: yupResolver(postSchema) });
 
 
-const onHandleSubmit = handleSubmit((data) => {
- const contextName = {username: registerPost.username, title : data.title , content: data.content  }
- registerNewPost(contextName)
- reset() 
-});
+  const onHandleSubmit = handleSubmit((data) => {
+    const contextName = { username: registerPost.username, title: data.title, content: data.content }
+    registerNewPost(contextName)
+    reset()
+  });
 
 
 
   return (
-    <ChakraProvider>
-      <VStack spacing="4" align="start" w="400px">
-      <form onSubmit={onHandleSubmit}>
 
-                <Text>
-               Title
-                </Text>
-             <Input
-                placeholder="Hello world"
-                {...register("title")}
-                />
+      <VStack spacing="4" align="start" w="400px"  marginLeft={"20px"}>
+        <form onSubmit={onHandleSubmit}>
 
-               <Text>
-               Content
-                </Text>
-             <Input
-                placeholder="Content here"
-                {...register("content")}
-                />
+          <Text fontSize={"16px"} fontFamily={"400"} color={"black"} paddingTop={"20px"}  paddingBottom={"8px"}>
+            Title
+          </Text>
+          <Input
+          width={"43.75rem"}
+           border={"1px solid black"}
+          
+            placeholder="Hello world"
+            {...register("title")}
+          />
 
-                <Box width={"100%"} pt={4}>
-                <Button  colorScheme='teal' size='sm' type="submit" >ENTER</Button>
-                </Box>
-             </form>
+          <Text fontSize={"16px"} fontFamily={"400"} color={"black"} paddingTop={"20px"} paddingBottom={"8px"}>
+            Content
+          </Text>
+       
+          <Textarea    border={"1px solid black"}
+            resize={"none"}
+          placeholder="Content here"
+          height={"70px"}
+          {...register("content")}>
+          
+          </Textarea>
+
+          <Flex width={"100%"}  pt={4}  justifyContent={"flex-end"}>
+            <Button          
+              backgroundColor={"#7695EC"}
+              color={"#fff"}
+              width={"120px"} 
+              height={"32px"}
+              colorScheme='' 
+              borderRadius={"8px"}
+              type="submit">
+                Create
+            </Button>
+          </Flex>
+        </form>
       </VStack>
-    </ChakraProvider>
+
   );
 };
 

@@ -5,7 +5,7 @@ import './index.css';
 import { Providers } from './Provider';
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
-import  {Apps}  from './App';
+import { Apps } from './App';
 
 
 const root = ReactDOM.createRoot(
@@ -13,12 +13,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-     <BrowserRouter>
-    <ChakraProvider>
-    <Providers>
-    <Apps/>
-    </Providers>
-    </ChakraProvider>
+    <BrowserRouter>
+      <ChakraProvider>
+        <Providers>
+          <Apps />
+        </Providers>
+      </ChakraProvider>
     </BrowserRouter>
   </React.StrictMode>
 

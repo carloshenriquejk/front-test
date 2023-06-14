@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   
-    const {posts, getPost, setRegisterPost} = usePost();
+    const { setRegisterPost} = usePost();
 
     const navigate = useNavigate()
   const postSchema = yup.object().shape({
@@ -24,11 +24,12 @@ export const Home = () => {
 
 
   const onHandleSubmit = handleSubmit((data) => {
-    //updateAttendant(data);
- console.log(data)
+
+
  const contextName = { username : data.name }
  setRegisterPost(contextName);
  navigate("/posts")
+ reset()
   });
 
     return (

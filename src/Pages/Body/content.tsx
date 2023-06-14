@@ -21,103 +21,105 @@ import * as yup from "yup";
 import DeletIcon from "../../../public/Icons/Vector.svg"
 import { Deletepost } from './Components/DeletPost';
 import { UpdatePost } from './Components/UpdatePost';
-
-interface FormData {
-  title: string;
-  content: string;
-}
+import { format, differenceInMinutes, differenceInSeconds, differenceInHours, differenceInDays } from 'date-fns';
 
 interface PlansContent {
-    username?: string;
-    date?: Date;
-    id?:  number;
-    content?: string;
+  username?: string;
+  date?: Date;
+  id?: number;
+  content?: string;
+  title?: string
 
-    
 }
 
 
 
 export const Content = (props: PlansContent) => {
-  if(props.date){
- const date = new Date(); 
- const time = new Date(props.date)
- const datePubli = time.getTime() - date.getTime() 
- const minutes = Math.round((datePubli / 1000 ) / 60)
+  const dateString = props.date;
+  const providedDate = dateString ? new Date(dateString) : undefined;
+  const currentDate = new Date();
+  let displayValue = 0;
+  let displayUnit = '';
+  
+  if (providedDate) {
+    const differenceMinutes = differenceInMinutes(currentDate, providedDate);
+    const differenceSeconds = differenceInSeconds(currentDate, providedDate);
+    const differenceHours = differenceInHours(currentDate, providedDate);
+    const differenceDays = differenceInDays(currentDate, providedDate);
+  
+    if (differenceDays >= 1) {
+      displayValue = differenceDays;
+      displayUnit = 'days';
+    } else if (differenceHours >= 1) {
+      displayValue = differenceHours;
+      displayUnit = 'hours';
+    } else if (differenceMinutes >= 1) {
+      displayValue = differenceMinutes;
+      displayUnit = 'minutes';
+    } else {
+      displayValue = differenceSeconds;
+      displayUnit = 'seconds';
+    }
+  }
+  
 
- console.log(minutes)
- 
-}
 
-const {
-  isOpen: isDeleteOpen,
-  onOpen: onDeleteOpen,
-  onClose: onDeleteClose,
-} = useDisclosure();
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onClose: onDeleteClose,
+  } = useDisclosure();
 
-const {
-  isOpen: isUpdateOpen,
-  onOpen: onUpdateOpen,
-  onClose: onUpdateClose,
-} = useDisclosure();
+  const {
+    isOpen: isUpdateOpen,
+    onOpen: onUpdateOpen,
+    onClose: onUpdateClose,
+  } = useDisclosure();
 
 
   return (
-    <Box>
-      <Flex bgColor={"#7695EC"} color={"#fff"} padding={"20px"}>
-    <Heading size={"22px"} rounded='md'  fontWeight={"700"}  >
-    Welcome to CodeLeap network!
-    </Heading>
+    <Box rounded='md' bg='white' marginTop={"20px"} borderRadius={"10px"} border={"1px solid #000"}>
+      <Flex bgColor={"#7695EC"} color={"#fff"} padding={"20px"} justifyContent={"space-between"}>
+        <Heading size={"22px"} rounded='md' fontWeight={"700"}  >
+          {props.title}
+        </Heading>
+        <Flex>
 
-    <Flex>
- 
+          <IconButton aria-label='' bgColor={"#7695"} onClick={onDeleteOpen} />
+          {props.id !== undefined && (
+            <Deletepost
+              isDeleteOpen={isDeleteOpen}
+              onDeleteClose={onDeleteClose}
+              id={props.id}
+            />
+          )}
 
-      <IconButton aria-label='' bgColor={"#7695"} onClick={onDeleteOpen}/>
-      {props.id !== undefined && (
-  <Deletepost
-    isDeleteOpen={isDeleteOpen}
-    onDeleteClose={onDeleteClose}
-    id={props.id}
-  />
+          <IconButton aria-label='' bgColor={"#7695"} onClick={onUpdateOpen} />
+          {props.id !== undefined && (
+            <UpdatePost
+              isUpdateOpen={isUpdateOpen}
+              onUpdateClose={onUpdateClose}
+              id={props.id}
+            />
+          )}
 
+        </Flex>
 
-  
-)}
-
-
-<IconButton aria-label='' bgColor={"#7695"} onClick={onUpdateOpen}/>
-      {props.id !== undefined && (
-  <UpdatePost
-    isUpdateOpen={isUpdateOpen}
-    onUpdateClose={onUpdateClose}
-    id={props.id}
-  />
-
-
-  
-)}
-
-  
-    </Flex>
-
-    </Flex>
-    <Flex p={"10px"}>
-  <Box>
-  @{props.username}
-  </Box>
-  <Spacer />
-  <Box >
-  {props.date?.toString()} minutes ago
-  </Box>
-</Flex>
-
-    <Flex padding={"10px"} flexDir={"column"}>
-     
-     <Text>
-    { props.content}
-     </Text>
-   
-    </Flex>
+      </Flex>
+      <Box  p={"24px"}>
+      <Flex justifyContent={"space-between"}>
+        <Text paddingRight={"4px"} fontSize={"16px"} fontFamily={"400"} color={"#777777"}>
+          @{props.username}
+        </Text>
+    
+        <Text fontSize={"16px"} fontFamily={"400"}  color={"#777777"}>
+        {displayValue} {displayUnit}
+        </Text>
+      </Flex>
+        <Text fontSize={"18px"} fontFamily={"400"} padding={"10px"}>
+          {props.content}
+        </Text>
+        </Box>
     </Box>
   );
 };

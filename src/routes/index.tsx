@@ -1,25 +1,26 @@
-import { Routes, Route  } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Home } from "../Pages/Home";
 import { Body } from "../Pages/Body";
 
 
 export const Router = () => {
-    return (
-      <>
-        <Routes>
+  return (
+    <>
+      <Routes>
+        
         <Route
           path="/"
           element={<Home />}
         />
-        </Routes>
+      </Routes>
 
-<Routes>
-<Route
-  path="/posts"
-  element={<Body />}
-/>
-</Routes>
-        
-       </>
-    )
+      <Routes>
+        <Route
+          path="/posts"
+          element={<Body />}
+        />
+      </Routes>
+
+    </>
+  )
 }  
