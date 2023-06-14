@@ -72,7 +72,10 @@ export const PostProvider = ({ children }: PostProviderProps) => {
       .post(`/careers/`, post)
       .then((res) => {
         setAction(!action)
-
+        toast({
+          status: "success",
+          title: "Post cadastrado com sucesso!!",
+        });
       })
       .catch((err) => console.log(err));
 
@@ -86,7 +89,7 @@ export const PostProvider = ({ children }: PostProviderProps) => {
           setAction(!action)
           toast({
             status: "success",
-            title: "Atendente deletado com sucesso!!",
+            title: "Post deletado com sucesso!!",
           });
         });
     } catch (e) {
@@ -108,13 +111,13 @@ export const PostProvider = ({ children }: PostProviderProps) => {
         setAction(!action)
         toast({
           status: "success",
-          title: "Plano atualizado com sucesso!!",
+          title: "Post atualizado com sucesso!!",
         });
       })
       .catch((e) => {
         toast({
           status: "error",
-          title: "Error ao atualizar atendente...",
+          title: "Error ao atualizar Post...",
         });
       });
   };

@@ -12,6 +12,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -47,22 +48,23 @@ export const UpdatePost = ({ isUpdateOpen, onUpdateClose, id }: UpdateProps) => 
   const onHandleSubmit = handleSubmit((data) => {
 
     const contextName = { id: id, title: data.title, content: data.content }
-
+   
     updatePost(contextName)
+    onUpdateClose()
     reset()
   });
 
 
 
   return (
-    <Modal isOpen={isUpdateOpen} onClose={onUpdateClose} isCentered size={"xl"}>
+    <Modal closeOnOverlayClick={false} isOpen={isUpdateOpen} onClose={onUpdateClose} isCentered size={"xl"}>
       <ModalOverlay />
       <ModalContent >
       <ModalHeader fontSize={"22px"} color={"black"} fontWeight={"700"}>Edit item</ModalHeader>
         <ModalBody >
           <form onSubmit={onHandleSubmit}>
 
-            <Text fontSize={"16px"} fontFamily={"400"} color={"black"}>
+            <Text fontSize={{ base: '13px', md: '16px' } } fontFamily={"400"} color={"black"}>
               Title
             </Text>
             <Input
@@ -71,22 +73,24 @@ export const UpdatePost = ({ isUpdateOpen, onUpdateClose, id }: UpdateProps) => 
               {...register("title")}
             />
 
-            <Text fontSize={"16px"} fontFamily={"400"} paddingTop={"10px"} color={"black"}>
+            <Text fontSize={{ base: '13px', md: '16px' } } fontFamily={"400"} paddingTop={"10px"} color={"black"}>
               Content
             </Text>
-            <Input
-            border={"1px solid black"}
-              placeholder="Content here"
-              {...register("content")}
-            />
-            <Flex padding={"20px"} gap={"10px"}>
+            <Textarea    border={"1px solid black"}
+            resize={"none"}
+          placeholder="Content here"
+          height={"70px"}
+          {...register("content")}>
+          
+          </Textarea>
+
+            <Flex padding={"20px 00px  10px 0px "} gap={"10px"} justifyContent={"flex-end"}>
             <Button
               backgroundColor="#fff"
-              width={"120px"} height={"32px"} 
+              width={"120px"} 
+              height={"32px"} 
               borderRadius={"8px"} 
-          
               border={"1px solid black"}
-            
               onClick={onUpdateClose}
             >
               Cancel
@@ -98,7 +102,7 @@ export const UpdatePost = ({ isUpdateOpen, onUpdateClose, id }: UpdateProps) => 
                borderRadius={"8px"} 
                colorScheme='' 
                 type="submit" 
-             
+            
                 backgroundColor={"#47B960"}>
                   Save
               </Button>

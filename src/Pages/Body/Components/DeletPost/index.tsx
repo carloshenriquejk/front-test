@@ -11,6 +11,8 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
+import { ReactComponent as IconSvg } from '../../../../../public/Icons/Vector.svg';
+
 
 import { usePost } from "../../../../Provider/Posts";
 
@@ -34,13 +36,13 @@ export const Deletepost = ({
     onDeleteClose();
   };
   return (
-    <Modal isOpen={isDeleteOpen} onClose={onDeleteClose} isCentered size={"xl"}>
+    <Modal isOpen={isDeleteOpen} onClose={onDeleteClose} isCentered size={"xl"} >
       <ModalOverlay />
       <ModalContent>
 
         <ModalHeader   fontSize="22px" fontWeight="500"> Are you sure you want to delete this item?</ModalHeader>
         <ModalBody>
-          <Flex  gap={"10px"}>
+          <Flex  gap={"10px"} justifyContent={"flex-end"} >
           <Button
               backgroundColor="#fff"
               width={"120px"} 

@@ -52,18 +52,18 @@ export const Form = () => {
       <VStack spacing="4" align="start" w="400px"  marginLeft={"20px"}>
         <form onSubmit={onHandleSubmit}>
 
-          <Text fontSize={"16px"} fontFamily={"400"} color={"black"} paddingTop={"20px"}  paddingBottom={"8px"}>
+          <Text fontSize={{ base: '13px', md: '16px' } } fontFamily={"400"} color={"black"} paddingTop={"20px"}  paddingBottom={"8px"}>
             Title
           </Text>
           <Input
-          width={"43.75rem"}
+          width={{ lg :  "43.75rem", md:  "43.75rem", sm:"22rem"} }
            border={"1px solid black"}
           
             placeholder="Hello world"
             {...register("title")}
           />
 
-          <Text fontSize={"16px"} fontFamily={"400"} color={"black"} paddingTop={"20px"} paddingBottom={"8px"}>
+          <Text fontSize={{ base: '13px', md: '16px' } } fontFamily={"400"} color={"black"} paddingTop={"20px"} paddingBottom={"8px"}>
             Content
           </Text>
        

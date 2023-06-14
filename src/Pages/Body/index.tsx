@@ -25,17 +25,19 @@ export const Body = () => {
     const logout = () => {
         
         navigate("/")
+        
     }
 
     return (
         <Flex alignItems={"flex-start"} justifyContent={"center"} bgColor={"#dddddd"}>
             <Box width={"50rem"} rounded='md' bg='white'  >
-                <Flex fontSize={"22px"} fontWeight={"700"} bgColor={"#7695EC"} color={"#fff"} padding={"27px"}  >
-                    <Heading >
+                <Flex  bgColor={"#7695EC"} color={"#fff"} padding={"27px"}  justifyContent={"space-between"}>
+                    <Text fontSize={{  md: "22px", sm: '16px' }} fontWeight={"700"} >
                         CodeLeap Network
-                    </Heading>
+                    </Text>
 
                     <Button
+                        marginTop={"10px"}
                         backgroundColor={"#FF5151"}
                         color={"#fff"}
                         width={"120px"}

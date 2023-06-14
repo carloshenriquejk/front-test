@@ -22,6 +22,9 @@ import DeletIcon from "../../../public/Icons/Vector.svg"
 import { Deletepost } from './Components/DeletPost';
 import { UpdatePost } from './Components/UpdatePost';
 import { format, differenceInMinutes, differenceInSeconds, differenceInHours, differenceInDays } from 'date-fns';
+import { FaEdit } from "react-icons/fa";
+import { DeleteIcon } from '@chakra-ui/icons';
+
 
 interface PlansContent {
   username?: string;
@@ -79,13 +82,14 @@ export const Content = (props: PlansContent) => {
 
   return (
     <Box rounded='md' bg='white' marginTop={"20px"} borderRadius={"10px"} border={"1px solid #000"}>
-      <Flex bgColor={"#7695EC"} color={"#fff"} padding={"20px"} justifyContent={"space-between"}>
-        <Heading size={"22px"} rounded='md' fontWeight={"700"}  >
+      <Flex bgColor={"#7695EC"} color={"#fff"} padding={"20px"} borderRadius={"10px"} justifyContent={"space-between"}>
+        <Heading fontSize={"22px"} rounded='md' fontWeight={"700"}  >
           {props.title}
         </Heading>
         <Flex>
+   
 
-          <IconButton aria-label='' bgColor={"#7695"} onClick={onDeleteOpen} />
+          <IconButton  colorScheme=''  backgroundColor={"#7695EC"} aria-label='' icon={ <DeleteIcon />}  onClick={onDeleteOpen} />
           {props.id !== undefined && (
             <Deletepost
               isDeleteOpen={isDeleteOpen}
@@ -94,7 +98,7 @@ export const Content = (props: PlansContent) => {
             />
           )}
 
-          <IconButton aria-label='' bgColor={"#7695"} onClick={onUpdateOpen} />
+          <IconButton  colorScheme=''  backgroundColor={"#7695EC"} aria-label=''  icon={ <FaEdit />} onClick={onUpdateOpen} />
           {props.id !== undefined && (
             <UpdatePost
               isUpdateOpen={isUpdateOpen}
@@ -108,11 +112,11 @@ export const Content = (props: PlansContent) => {
       </Flex>
       <Box  p={"24px"}>
       <Flex justifyContent={"space-between"}>
-        <Text paddingRight={"4px"} fontSize={"16px"} fontFamily={"400"} color={"#777777"}>
+        <Text paddingRight={"4px"} fontSize={{ base: '13px', md: '16px' } } fontFamily={"400"} color={"#777777"}>
           @{props.username}
         </Text>
     
-        <Text fontSize={"16px"} fontFamily={"400"}  color={"#777777"}>
+        <Text fontSize={{ base: '13px', md: '16px' } } fontFamily={"400"}  color={"#777777"}>
         {displayValue} {displayUnit}
         </Text>
       </Flex>
