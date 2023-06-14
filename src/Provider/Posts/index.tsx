@@ -77,7 +77,14 @@ export const PostProvider = ({ children }: PostProviderProps) => {
           title: "Post cadastrado com sucesso!!",
         });
       })
-      .catch((err) => console.log(err));
+      .catch((error) =>{ 
+        console.log(error)
+      
+        toast({
+          status: "error",
+          title: "Error ao cadastrado Post...",
+        });
+      });
 
   };
 
@@ -92,8 +99,13 @@ export const PostProvider = ({ children }: PostProviderProps) => {
             title: "Post deletado com sucesso!!",
           });
         });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
+ 
+        toast({
+          status: "error",
+          title: "Error ao deletado Post...",
+        });
     }
   };
 
@@ -114,7 +126,8 @@ export const PostProvider = ({ children }: PostProviderProps) => {
           title: "Post atualizado com sucesso!!",
         });
       })
-      .catch((e) => {
+      .catch((error) => {
+        console.log(error)
         toast({
           status: "error",
           title: "Error ao atualizar Post...",
@@ -130,7 +143,6 @@ export const PostProvider = ({ children }: PostProviderProps) => {
   return (
     <PostContext.Provider value={{
       registerNewPost,
-   
       getPosts,
       posts,
       setPosts,

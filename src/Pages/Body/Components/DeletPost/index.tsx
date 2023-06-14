@@ -19,14 +19,12 @@ import { usePost } from "../../../../Provider/Posts";
 interface DeleteProps {
   isDeleteOpen: boolean;
   onDeleteClose: () => void;
-
   id: number;
 }
 
 export const Deletepost = ({
   isDeleteOpen,
   onDeleteClose,
-
   id,
 }: DeleteProps) => {
   const { deletePost } = usePost();
@@ -36,7 +34,7 @@ export const Deletepost = ({
     onDeleteClose();
   };
   return (
-    <Modal isOpen={isDeleteOpen} onClose={onDeleteClose} isCentered size={"xl"} >
+    <Modal closeOnOverlayClick={false} isOpen={isDeleteOpen} onClose={onDeleteClose} isCentered size={"xl"} >
       <ModalOverlay />
       <ModalContent>
 
@@ -65,8 +63,6 @@ export const Deletepost = ({
             </Button>
           </Flex>
         </ModalBody>
-
- 
       </ModalContent>
     </Modal>
   );

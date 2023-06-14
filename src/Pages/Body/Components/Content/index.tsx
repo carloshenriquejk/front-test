@@ -14,13 +14,13 @@ import {
   IconButton,
   useDisclosure,
 } from '@chakra-ui/react';
-import { usePost } from '../../Provider/Posts';
+import { usePost } from '../../../../Provider/Posts';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import DeletIcon from "../../../public/Icons/Vector.svg"
-import { Deletepost } from './Components/DeletPost';
-import { UpdatePost } from './Components/UpdatePost';
+import { Deletepost } from '../DeletPost';
+import { UpdatePost } from '../UpdatePost';
 import { format, differenceInMinutes, differenceInSeconds, differenceInHours, differenceInDays } from 'date-fns';
 import { FaEdit } from "react-icons/fa";
 import { DeleteIcon } from '@chakra-ui/icons';
@@ -35,21 +35,20 @@ interface PlansContent {
 
 }
 
-
-
 export const Content = (props: PlansContent) => {
+
   const dateString = props.date;
   const providedDate = dateString ? new Date(dateString) : undefined;
   const currentDate = new Date();
   let displayValue = 0;
   let displayUnit = '';
-  
+
   if (providedDate) {
     const differenceMinutes = differenceInMinutes(currentDate, providedDate);
     const differenceSeconds = differenceInSeconds(currentDate, providedDate);
     const differenceHours = differenceInHours(currentDate, providedDate);
     const differenceDays = differenceInDays(currentDate, providedDate);
-  
+
     if (differenceDays >= 1) {
       displayValue = differenceDays;
       displayUnit = 'days';
@@ -64,7 +63,7 @@ export const Content = (props: PlansContent) => {
       displayUnit = 'seconds';
     }
   }
-  
+
 
 
   const {
@@ -87,9 +86,8 @@ export const Content = (props: PlansContent) => {
           {props.title}
         </Heading>
         <Flex>
-   
 
-          <IconButton  colorScheme=''  backgroundColor={"#7695EC"} aria-label='' icon={ <DeleteIcon />}  onClick={onDeleteOpen} />
+          <IconButton colorScheme='' backgroundColor={"#7695EC"} aria-label='' icon={<DeleteIcon />} onClick={onDeleteOpen} />
           {props.id !== undefined && (
             <Deletepost
               isDeleteOpen={isDeleteOpen}
@@ -98,7 +96,7 @@ export const Content = (props: PlansContent) => {
             />
           )}
 
-          <IconButton  colorScheme=''  backgroundColor={"#7695EC"} aria-label=''  icon={ <FaEdit />} onClick={onUpdateOpen} />
+          <IconButton colorScheme='' backgroundColor={"#7695EC"} aria-label='' icon={<FaEdit />} onClick={onUpdateOpen} />
           {props.id !== undefined && (
             <UpdatePost
               isUpdateOpen={isUpdateOpen}
@@ -110,20 +108,20 @@ export const Content = (props: PlansContent) => {
         </Flex>
 
       </Flex>
-      <Box  p={"24px"}>
-      <Flex justifyContent={"space-between"}>
-        <Text paddingRight={"4px"} fontSize={{ base: '13px', md: '16px' } } fontFamily={"400"} color={"#777777"}>
-          @{props.username}
-        </Text>
-    
-        <Text fontSize={{ base: '13px', md: '16px' } } fontFamily={"400"}  color={"#777777"}>
-        {displayValue} {displayUnit}
-        </Text>
-      </Flex>
+      <Box p={"24px"}>
+        <Flex justifyContent={"space-between"}>
+          <Text paddingRight={"4px"} fontSize={{ base: '13px', md: '16px' }} fontFamily={"400"} color={"#777777"}>
+            @{props.username}
+          </Text>
+
+          <Text fontSize={{ base: '13px', md: '16px' }} fontFamily={"400"} color={"#777777"}>
+            {displayValue} {displayUnit}
+          </Text>
+        </Flex>
         <Text fontSize={"18px"} fontFamily={"400"} padding={"10px"}>
           {props.content}
         </Text>
-        </Box>
+      </Box>
     </Box>
   );
 };
